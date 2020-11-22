@@ -9,7 +9,7 @@ void __attribute__((section(".user1"))) user1(void){
     while(1){
         if(*sem == 1){
             (*shared_cpt)++;
-            debug("\n[USR]Valeur incrémentée!\n\n");
+            debug("\n[USR]Valeur incrémentée!\n");
             *sem = 0;
         } 
     }

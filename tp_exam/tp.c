@@ -50,29 +50,7 @@ void init_user2_kernel_stack(void){
 
 void tp()
 {   
-    /*
-    DEBUG:
-        TESTER L ASM VOLATILE DE INTRC.C IRQ0 HANDLER, C'EST SUR CA MARCHE PAS
-        
-        JE PIGE RIEN A L ASM VOLATILE 
-        
-        ALED.exe
-
-        Solution: Si tu ne peux pas battre leave et ret, saute par dessus 
-        #Goto #jmp #byebyeLeaveAndRet
-
-        New PB: LOOK AT PRIORITY BETWEEN INT80 AND INT32
-        MAYBE USER FONCT > CLOCK
-
-        Solution: Balec, vive les semaphores
-
-    */
-
-
-
-    debug("\nESP VALUE: %x\n", (6 * sizeof(seg_desc_t) - 1) );
     
-
     init_gdt();
     init_paging();
     debug("\n[TP] Starting init_user1_kernel_stack\n");

@@ -18,7 +18,7 @@ enum IRQ0_mode{IRQ0_KERNEL, IRQ0_USER1, IRQ0_USER2} irq0_current_mode;
 uint32_t esp_user1, esp_user2;
 
 void sys_counter(uint32_t *counter){
-   debug("\n[INT]Int 0x80: cpt= 0x%x\n\n", *counter);
+   debug("\n[INT]Int 0x80: cpt= 0x%x\n", *counter);
 }
 
 void intr_IRQ0(void){
@@ -83,7 +83,7 @@ void __regparm__(1) intr_hdlr(int_ctx_t *ctx)
    if(vector == 0x80){
       sys_counter((uint32_t*)(ctx->gpr.eax.raw));
    }else if(vector == 0x20){
-      debug("\nHorloge!\n\n");
+      debug("\nHorloge!\n");
       intr_IRQ0();
    }else{
       debug("\nIDT event\n"
