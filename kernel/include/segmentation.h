@@ -15,4 +15,6 @@
 void print_gdt(seg_desc_t * base_addr, int nbr_desc);
 void print_gdtr(void);
 void init_gdt(void);
+void set_registers_kernel(void);
+void set_registers_user(void);
 #endif

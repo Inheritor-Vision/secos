@@ -3,20 +3,24 @@
 #include <debug.h>
 
 uint32_t *shared_cpt = (uint32_t*)SHARED_USERS_MEMORY;
+uint8_t *sem = (uint8_t*)(SHARED_USERS_MEMORY + sizeof(uint32_t));
 
 void __attribute__((section(".user1"))) user1(void){
-    debug("\nuser1 reached!\n");
     while(1){
-        (*shared_cpt)++;
+        if(*sem == 1){
+            (*shared_cpt)++;
+            debug("\n[USR]Valeur incrémentée!\n\n");
+            *sem = 0;
+        } 
     }
-
-
 }
 
 void __attribute__((section(".user2"))) user2(void){
-    debug("\nuser2 reached!\n");
     while(1){
-        asm volatile("int $0x80"::"a"(shared_cpt));
+        if(*sem == 1){
+            asm volatile("int $0x80"::"a"(shared_cpt));
+            *sem = 0;
+        }
     }
 
     
