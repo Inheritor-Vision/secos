@@ -11,6 +11,8 @@
 #include <users.h>
 #include <segmentation.h>
 
+#include <pagemem.h>
+
 
 extern info_t *info;
 
@@ -60,6 +62,11 @@ void tp()
     debug("[TP] Init init_user2_kernel_stack\n");
     init_user2_kernel_stack();
     debug("[TP] End of init_user2_kernel_stack!\n");
+
+
+    pte32_t *pte_user = (pte32_t *) (PAGING_PTB_USER1_KERNEL_BASE_ADDRESS + 0x305 * sizeof(pte32_t));
+    debug("\naddr 0x%x p 0x%x wr 0x%x us 0x%x\n", pte_user->addr << 12, pte_user->p, pte_user->rw, pte_user->lvl);
+
     set_registers_user();
 
 

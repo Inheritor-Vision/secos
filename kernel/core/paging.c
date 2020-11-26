@@ -33,7 +33,7 @@ void init_user1(void){
 
     //A raffiner si l'envie me prends
     for(unsigned long i = 0; i < PTE32_PER_PT; i++){
-        pg_set_entry(&pte_kernel[i], PG_USR|PG_RW, (i + (0x0<<10)));
+        pg_set_entry(&pte_kernel[i], PG_KRN|PG_RW, (i + (0x0<<10)));
     }
 
     for(unsigned long i = 0; i < PTE32_PER_PT; i++){
@@ -65,7 +65,7 @@ void init_user2(void){
 
     for(unsigned long i = 0; i < PTE32_PER_PT; i++){
         if(((i << 12) + (1<<22)) == USER2_VIRTUAL_SHARED_MEMORY){
-            pg_set_entry(&pte_user[i], PG_USR|PG_RW, SHARED_USERS_MEMORY >> 12);
+            pg_set_entry(&pte_user[i], PG_KRN|PG_RW, SHARED_USERS_MEMORY >> 12);
         }else{
             pg_set_entry(&pte_user[i], PG_USR|PG_RW, (i + (0x1<<10)));
         }
